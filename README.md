@@ -1,5 +1,7 @@
 # VIMonad
 
+ABANDONED - Attempt to get this working under Ubuntu 18.04 abandoned, but you can take a look at progress so far
+
 VIMonad is a fork of XMonad that manages windows in a modal way like that in VIM. Some of the features include
 
 * [Split layout](#layout): a 3-level nested layout that divides each workspace into a grid of rectangular areas each containing unlimited number of tabs (like [Notion](http://notion.sourceforge.net/), with added advantage of dynamic resizing)
@@ -33,12 +35,31 @@ VIMonad is built upon XMonad and it borrows a lot of great modules already exist
 
 ### Steps
 
-1. clone the repo somewhere
-2. move all the scripts under [bin](bin) to a directory included in `$PATH`
-3. copy files under [.xmonad](.xmonad) to `~/.xmonad` (note your old xmonad configuration will be overriden)
+On Ubuntu:
+
+```
+curl -sSL https://get.haskellstack.org/ | sh
+mkdir ~/opt
+cd ~/opt
+git clone git@github.com:nmbooker/VIMonad.git -b mine
+cd ~
+ln -s opt/VIMonad/.xmonad .xmonad
+echo 'PATH="${HOME}/.local/bin:${HOME}/opt/VIMonad/bin:$PATH"' >> ~/.bashrc
+. ~/.bashrc
+export PATH
+bash ~/opt/VIMonad/ubuntu-prep.sh
+cd ~/.xmonad
+stack init
+# Add --solver if this gives you problems where it can't find a suitable ghc
+```
+
+Based on: https://brianbuccola.com/how-to-install-xmonad-and-xmobar-via-stack/
+
+4. move all the scripts under [bin](bin) to a directory included in `$PATH`
+5. copy files under [.xmonad](.xmonad) to `~/.xmonad` (note your old xmonad configuration will be overriden)
     * [.xmonad/xmonad.hs][xmonad.hs] serves as a template config file; modify it if you'd like
-4. `cd` into [xmonad](xmonad); `cabal install`
-5. `cd` into [XMonadContrib](XMonadContrib); `cabal install`
+6. `cd` into [xmonad](xmonad); `cabal install`
+7. `cd` into [XMonadContrib](XMonadContrib); `cabal install`
 
 ## Concepts
 
